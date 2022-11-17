@@ -1,0 +1,23 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex app to display pokemons",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KevvKo/pokedex-app.git"
+  },
+  "keywords": [
+    "angular",
+    "cordova"
+  ],
+  "author": "Kevin Klein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevvKo/pokedex-app/issues"
+  },
+  "homepage": "https://github.com/KevvKo/pokedex-app#readme"
+}
