@@ -3,6 +3,11 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment} from '../environments/environment';
 
+export interface Pokemon {
+  name: string;
+  api: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
