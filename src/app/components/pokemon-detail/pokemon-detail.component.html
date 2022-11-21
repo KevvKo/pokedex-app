@@ -1,4 +1,6 @@
-<section>
-    <h2>{{pokemonName}}</h2>
-    
-</section>
+<ng-container *ngIf="pokemon">
+    <section class="flex flex-col max-h-40 max-w-40 active:bg-slate-200 hover:bg-slate-200 hover:cursor-pointer">
+        <h2>{{pokemon.name}}</h2>
+        <img [src]="pokemon.sprite" />
+    </section>
+</ng-container>

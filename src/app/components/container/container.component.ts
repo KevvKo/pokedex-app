@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
+import { Observable } from 'rxjs';
+import { Pokemon, PokemonService, PokemonAPI} from 'src/app/services/pokemon.service';
 
 @Component({
   selector: 'app-container',
@@ -9,19 +10,13 @@ import { Pokemon, PokemonService } from 'src/app/services/pokemon.service';
 
 export class ContainerComponent implements OnInit {
 
-  pokemons: Pokemon [];
+  pokemons$ : Observable<Pokemon[]> = this.pokemonService.getPokemons()
+  pokemons: Pokemon[];
+  pokemonData: PokemonAPI;
   nextList: String = '';
 
   constructor (private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
-
-    this.pokemonService
-      .getData()
-      .subscribe( data => {
-        this.pokemons = data.results
-        this.nextList = data.next
-      })
   }
-
 }

@@ -1,9 +1,9 @@
-<main class="m-3 flex flex-wrap">
-    <app-card *ngFor="let pokemon of pokemons">
-        <app-pokemon-detail 
-            [pokemonName]="pokemon.name"
-            pokemonAPI="pokemon.url"
-        ></app-pokemon-detail>
-    </app-card>
-</main>
-´
+<ng-container *ngIf="pokemons$ | async as cache">
+    <main class="flex flex-wrap">
+        <app-card *ngFor="let pokemon of cache">
+            <app-pokemon-detail 
+                [pokemon]="pokemon"
+            ></app-pokemon-detail>
+        </app-card>
+    </main>
+</ng-container>
