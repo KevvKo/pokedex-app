@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Pokemon, PokemonService, PokemonAPI} from 'src/app/services/pokemon.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
+import { Pokemon, PokemonAPI} from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-container',

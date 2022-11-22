@@ -1,36 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, subscribeOn, combineLatest, switchMap,tap, pipe, map, mergeMap, catchError, throwError  } from 'rxjs';
+import { Observable, combineLatest, switchMap, map, catchError, throwError  } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment} from '../environments/environment';
-
-
-
-export interface Pokemon {
-  id: number,
-  name: string
-  height: number
-  weight: number
-  stats: PokemonStats
-  types: string []
-  abilities: string []
-  sprite: string
-}
-
-interface PokemonStats {
-  hp: number
-  attack: number
-  defense: number
-  specialAttack: number
-  specialDefense: number
-  speed: number
-}
-
-export interface PokemonAPI {
-  next: string
-  previous: string,
-  results: any[]
-}
-
+import { environment } from '../environments/environment';
+import { Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
 @Injectable({
   providedIn: 'root'
 })
