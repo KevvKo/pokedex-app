@@ -10,60 +10,56 @@
 
 <ng-container *ngIf="open">
     <div class="fixed z-10 bg-zinc-800 h-screen w-screen top-0 left-0 opacity-80 overflow-hidden" (click)="toggleDialog()"></div>
-    <div class="fixed z-20 rounded bg-slate-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10/12 h-3/5 p-2">
+    <div class="fixed flex flex-col z-20 rounded bg-slate-200 bottom-0 left-0 w-full h-full p-2">
         <div class="dialog-header flex justify-end">
             <button class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="toggleDialog()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-          </div>
-          <div>
-            <div>
-                <img [src]="selectedPokemon.sprite" [alt]="selectedPokemon.name" class="w-8/12 mx-auto"/>
-                <h2 class="text-lg text-center capitalize font-semibold mx-auto mb-1">{{selectedPokemon.name}}</h2>
-                <div class="types flex justify-center">
-                    <span class="mx-2 text-sm rounded-full px-3 py-1" [ngClass]="getClassByType(type)" *ngFor="let type of selectedPokemon.types">{{type}}</span>
-                </div>
-                <div class="body-stats flex justify-center mt-3">
-                    <div class="flex flex-col justify-center w-1/4">
-                        <span class="text-center">{{selectedPokemon.height}}</span>
-                        <span class="text-center text-sm">Size</span>
-                    </div>
-                    <div class="flex flex-col justify-center w-1/4"> 
-                        <span class="text-center">{{selectedPokemon.weight}}</span>
-                        <span class="text-center text-sm">Weight</span>
-                    </div>
-                </div>
-                <table class="h-fit w-1/2 text-sm">
-                    <tbody>
-                        <tr>
-                            <td>HP:</td>
-                            <td class="">{{selectedPokemon.stats.hp}}</td>
-                        </tr>
-                        <tr>
-                            <td>Attack:</td>
-                            <td class="">{{selectedPokemon.stats.attack}}</td>
-                        </tr>
-                        <tr>
-                            <td>Defense:</td>
-                            <td class="">{{selectedPokemon.stats.defense}}</td>
-                        </tr>
-                        <tr>
-                            <td>Special Attack:</td>
-                            <td class="">{{selectedPokemon.stats.specialAttack}}</td>
-                        </tr>
-                        <tr>
-                            <td>Special Defense:</td>
-                            <td class="">{{selectedPokemon.stats.specialDefense}}</td>
-                        </tr>
-                        <tr>
-                            <td>Speed:</td>
-                            <td class="">{{selectedPokemon.stats.speed}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="flex flex-col flex-1">
+            <img [src]="selectedPokemon.sprite" [alt]="selectedPokemon.name" class="w-8/12 mx-auto"/>
+            <h2 class="text-lg text-center capitalize font-semibold mx-auto mb-2">{{selectedPokemon.name}}</h2>
+            <div class="types flex justify-center">
+                <span class="mx-2 text-sm rounded-full px-3 py-1" [ngClass]="getClassByType(type)" *ngFor="let type of selectedPokemon.types">{{type}}</span>
             </div>
-          </div>
+            <div class="body-stats flex justify-center mt-5">
+                <div class="flex flex-col justify-center w-1/4">
+                    <span class="text-center">{{selectedPokemon.height}}</span>
+                    <span class="text-center text-sm text-slate-500">Size</span>
+                </div>
+                <div class="flex flex-col justify-center w-1/4"> 
+                    <span class="text-center">{{selectedPokemon.weight}}</span>
+                    <span class="text-center text-sm text-slate-500">Weight</span>
+                </div>
+            </div>
+            <div class="px-8 my-auto">
+                <div class="flex align-center mb-2"> 
+                    <span class="w-1/2">HP</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.hp}}</span>
+                </div>    
+                <div class="flex mb-2"> 
+                    <span class="w-1/2">Attack</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.attack}}</span>
+                </div>    
+                <div class="flex mb-2"> 
+                    <span class="w-1/2">Defense</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.defense}}</span>
+                </div>    
+                <div class="flex mb-2"> 
+                    <span class="w-1/2">Special Attack</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.specialAttack}}</span>
+                </div>    
+                <div class="flex mb-2"> 
+                    <span class="w-1/2">Special Defense</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.specialDefense}}</span>
+                </div>    
+                <div class="flex mb-2"> 
+                    <span class="w-1/2">Speed</span>
+                    <span class="w-1/2 text-right">{{selectedPokemon.stats.speed}}</span>
+                </div>    
+            </div>
+        </div>
     </div>
 </ng-container>
