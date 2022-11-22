@@ -1,7 +1,7 @@
 <ng-container *ngIf="pokemon">
     <section 
         class="flex flex-col max-h-40 max-w-40 active:bg-slate-200 hover:bg-slate-200 hover:cursor-pointer"
-        (click)="handleClick(pokemon)"
+        (click)="handleOpenDialog(pokemon)"
     >       
         <img [src]="pokemon.sprite" />  
         <h2 class="text-lg capitalize text-center">{{pokemon.name}}</h2>       
@@ -9,10 +9,10 @@
 </ng-container>
 
 <ng-container *ngIf="open">
-    <div class="fixed z-10 bg-zinc-800 h-screen w-screen top-0 left-0 opacity-80 overflow-hidden" (click)="toggleDialog()"></div>
+    <div class="fixed z-10 bg-zinc-800 h-screen w-screen top-0 left-0 opacity-80 overflow-hidden" (click)="handleCloseDialog()"></div>
     <div class="fixed flex flex-col z-20 rounded bg-slate-200 bottom-0 left-0 w-full h-full p-2">
         <div class="dialog-header flex justify-end">
-            <button class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="toggleDialog()">
+            <button class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="handleCloseDialog()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>

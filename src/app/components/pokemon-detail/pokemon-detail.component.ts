@@ -35,9 +35,15 @@ export class PokemonDetailComponent {
 
   @Input() pokemon: Pokemon;
 
-  handleClick(pokemon: Pokemon): void{
+  handleOpenDialog(pokemon: Pokemon): void{
     this.selectedPokemon = pokemon;
     this.toggleDialog()
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  }
+
+  handleCloseDialog(): void {
+    this.toggleDialog();
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
   }
 
   toggleDialog(): void {
