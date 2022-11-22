@@ -8,5 +8,18 @@ import { Pokemon } from '../../services/pokemon.service';
 })
 
 export class PokemonDetailComponent {
+
+  open: boolean = false;
+  selectedPokemon: Pokemon;
+
   @Input() pokemon: Pokemon;
+
+  handleClick(pokemon: Pokemon): void{
+    this.selectedPokemon = pokemon;
+    this.toggleDialog()
+  }
+
+  toggleDialog(): void {
+    this.open = !this.open
+  }
 }

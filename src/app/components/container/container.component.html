@@ -1,5 +1,5 @@
 <ng-container *ngIf="pokemons$ | async as cache">
-    <main class="flex flex-wrap">
+    <main class="flex flex-wrap p-2">
         <app-card *ngFor="let pokemon of cache">
             <app-pokemon-detail 
                 [pokemon]="pokemon"
