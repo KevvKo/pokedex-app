@@ -1,18 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Observable, combineLatest, switchMap, map, catchError, throwError  } from 'rxjs';
+import { 
+  Observable, 
+  combineLatest, 
+  switchMap, 
+  map, 
+  catchError, 
+  throwError, 
+  BehaviorSubject,
+} from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class PokemonService {
 
-  private pokemonAPI = environment.pokemonListAPI;
+  private nextAPI: string = environment.pokemonListAPI;
+  private previousAPI: string;
+  private _pokemons: BehaviorSubject<Pokemon[]> = new BehaviorSubject<Pokemon[]>([]);
+  public readonly pokemons$: Observable<Pokemon[]> = this._pokemons.asObservable()
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadPokemons();
+  }
 
+  get pokemons(): Observable<Pokemon[]> {
+    return this._pokemons
+  }
+  
   mapToPokemon(pokemon: any): Pokemon {
 
     return {
@@ -41,10 +59,14 @@ export class PokemonService {
     }
   }
 
-  getPokemons(): Observable<Pokemon[]>{
-    return this.http.get<PokemonAPI>(this.pokemonAPI)
+  loadPokemonData(): Observable<Pokemon[]>{
+    return this.http.get<PokemonAPI>(this.nextAPI)
       .pipe(
         switchMap( data => {
+        
+          this.nextAPI = data.next;
+          this.previousAPI = data.previous;
+        
           return combineLatest( data.results.map( item => {
             return this.getPokemonDetails(item.url)
           }))
@@ -52,7 +74,7 @@ export class PokemonService {
         catchError(this.handleError),
       )
   }
-  
+
   getPokemonDetails(apiURL: string): Observable<Pokemon> {
 
     return this.http.get<any>(apiURL)
@@ -72,4 +94,10 @@ export class PokemonService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
+
+  loadPokemons(): void {
+    this.loadPokemonData().subscribe( response =>{
+      this._pokemons.next([...this._pokemons.getValue(), ...response])
+    })
+  }
 }
