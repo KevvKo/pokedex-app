@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ContainerComponent } from './components/container/container.component';
 import { CardComponent } from './components/card/card.component';
@@ -13,7 +12,6 @@ import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-deta
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     HeaderComponent,
     ContainerComponent,
     CardComponent,

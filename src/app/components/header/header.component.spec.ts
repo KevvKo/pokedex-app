@@ -20,4 +20,8 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have the correct title', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toEqual('Pokedex');
+  })
 });
