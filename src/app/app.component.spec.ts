@@ -1,6 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { Component, HostBinding, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-header',
+  template: ``
+})
+class  HeaderComponent{}
+
+@Component({
+  selector: 'app-container',
+  template: ``
+})
+class  ContainerComponent{}
+
+@Component({
+  selector: 'app-card',
+  template: ``
+})
+class  CardComponent{}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +28,9 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        ContainerComponent,
       ],
     }).compileComponents();
   });
@@ -25,11 +46,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('pokedex-app');
   });
-
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('header')?.textContent).toEqual('Pokedex');
-  // });
 });
