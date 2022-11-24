@@ -22,6 +22,6 @@ describe('HeaderComponent', () => {
   });
   it('should have the correct title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toEqual('Pokedex');
+    expect(compiled.querySelector('h1')?.textContent).toEqual('Pokedex');
   })
 });
