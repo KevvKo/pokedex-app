@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, merge,forkJoin, tap, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { Pokemon } from 'src/app/interfaces/interfaces';
 
