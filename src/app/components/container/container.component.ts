@@ -24,10 +24,11 @@ export class ContainerComponent implements OnInit {
   handleInfiniteScroll(): void {
 
     const throttleTime = 1000;
+    const distanceToPagBottom = 180;
 
     this.throttle(() => {
       const endOfPage = 
-        window.innerHeight + window.scrollY >= document.body.offsetHeight
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - distanceToPagBottom;
       
         if(endOfPage) this.loadNextPokemons();
 

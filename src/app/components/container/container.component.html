@@ -1,6 +1,6 @@
-<!-- <ng-container *ngIf="pokemons$ | async as cache"> -->
+<ng-container *ngIf="pokemons$ | async as cache">
     <main class="flex flex-wrap p-2" (scroll)="handleInfiniteScroll">
-        <app-card *ngFor="let pokemon of pokemons$ | async">
+        <app-card *ngFor="let pokemon of cache">
             <app-pokemon-detail 
                 [pokemon]="pokemon"
             ></app-pokemon-detail>
@@ -12,4 +12,4 @@
                 <div class="skeleton-card h-40 w-40"></div>
             </app-card>
     </main>
-<!-- </ng-container> -->
+</ng-container>

@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    pokemonListAPI: 'https://pokeapi.co/api/v2/pokemon/?limit=10"',
+    pokemonListAPI: 'https://pokeapi.co/api/v2/pokemon/?limit=20"',
   };
