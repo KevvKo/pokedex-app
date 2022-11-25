@@ -12,7 +12,7 @@ import { Pokemon } from 'src/app/interfaces/interfaces';
 export class ContainerComponent implements OnInit {
 
   private throttleTimer: boolean = false;
-
+  isLoading: boolean = true
   pokemons$ : Observable<Pokemon[]> = this.pokemonService.pokemons
 
   constructor (private pokemonService: PokemonService) {}
