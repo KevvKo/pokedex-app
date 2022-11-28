@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContainerComponent } from './container.component';
 import { Pokemon } from 'src/app/interfaces/interfaces';
-import { PokemonService } from'src/app/services/pokemon.service';
 import { faker } from '@faker-js/faker';
+import { PokemonService } from '../../services/pokemon.service';
+import { of } from 'rxjs';
 
 describe('ContainerComponent', () => {
   let component: ContainerComponent;
@@ -79,15 +80,11 @@ describe('ContainerComponent', () => {
     },
   ];
 
-  const fakePokemonService = {
-    pokemons(){
-      return fakePokemons
-    },
-
-    loadPokemons(){
-
+  const fakePokemonService: 
+    Pick<PokemonService, keyof PokemonService> = {
+      pokemons: of(fakePokemons),
+      loadPokemons: jest.fn(() =>of(fakePokemons) )
     }
-  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

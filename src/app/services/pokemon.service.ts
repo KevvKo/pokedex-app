@@ -21,7 +21,6 @@ export class PokemonService {
   private nextAPI: string = environment.pokemonListAPI;
   private previousAPI: string;
   private _pokemons: BehaviorSubject<Pokemon[]> = new BehaviorSubject<Pokemon[]>([]);
-  public readonly pokemons$: Observable<Pokemon[]> = this._pokemons.asObservable()
 
   constructor(private http: HttpClient) {
     this.loadPokemons();
@@ -31,7 +30,7 @@ export class PokemonService {
     return this._pokemons
   }
   
-  mapToPokemon(pokemon: any): Pokemon {
+  private mapToPokemon(pokemon: any): Pokemon {
 
     return {
       id: pokemon.id,
@@ -45,7 +44,7 @@ export class PokemonService {
     }
   }
 
-  mapToPokemonStatistics(pokemon: any): PokemonStats {
+  private mapToPokemonStatistics(pokemon: any): PokemonStats {
 
     const { stats } = pokemon;
 
@@ -59,7 +58,7 @@ export class PokemonService {
     }
   }
 
-  loadPokemonData(): Observable<Pokemon[]>{
+  private loadPokemonData(): Observable<Pokemon[]>{
     return this.http.get<PokemonAPI>(this.nextAPI)
       .pipe(
         switchMap( data => {
@@ -75,7 +74,7 @@ export class PokemonService {
       )
   }
 
-  getPokemonDetails(apiURL: string): Observable<Pokemon> {
+  private getPokemonDetails(apiURL: string): Observable<Pokemon> {
 
     return this.http.get<any>(apiURL)
       .pipe(
