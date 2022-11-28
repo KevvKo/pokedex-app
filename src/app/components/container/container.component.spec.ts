@@ -1,68 +1,98 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContainerComponent } from './container.component';
 import { Pokemon } from 'src/app/interfaces/interfaces';
+import { PokemonService } from'src/app/services/pokemon.service';
+import { faker } from '@faker-js/faker';
 
 describe('ContainerComponent', () => {
   let component: ContainerComponent;
   let fixture: ComponentFixture<ContainerComponent>;
 
-  const mockPokemons: Pokemon[] = [
+  const fakePokemons: Pokemon[] = [
     {
-      id: 1,
-      name: 'Testmon',
-      height: 123,
-      weight: 456,
+      id: faker.datatype.number(10),
+      name: faker.animal.type(),
+      height: faker.datatype.number(),
+      weight: faker.datatype.number(),
       stats: {
-        hp: 789,
-        attack: 0,
-        defense: 11,
-        specialAttack: 22,
-        specialDefense: 33,
-        speed: 44
+        hp: faker.datatype.number(),
+        attack: faker.datatype.number(),
+        defense: faker.datatype.number(),
+        specialAttack: faker.datatype.number(),
+        specialDefense: faker.datatype.number(),
+        speed: faker.datatype.number()
       },
       types: ['flying', 'water'],
-      abilities: ['testing', 'debugging'],
-      sprite: '12345'
+      abilities: [faker.random.word(), faker.random.word()],
+      sprite: faker.image.imageUrl()
     },
     {
-      id: 2,
-      name: 'Testmon2',
-      height: 123,
-      weight: 456,
+      id: faker.datatype.number(10),
+      name: faker.animal.type(),
+      height: faker.datatype.number(),
+      weight: faker.datatype.number(),
       stats: {
-        hp: 789,
-        attack: 0,
-        defense: 11,
-        specialAttack: 22,
-        specialDefense: 33,
-        speed: 44
+        hp: faker.datatype.number(),
+        attack: faker.datatype.number(),
+        defense: faker.datatype.number(),
+        specialAttack: faker.datatype.number(),
+        specialDefense: faker.datatype.number(),
+        speed: faker.datatype.number()
       },
-      types: ['dragon'],
-      abilities: ['testing', 'debugging'],
-      sprite: '12345'
+      types: ['flying', 'water'],
+      abilities: [faker.random.word(), faker.random.word()],
+      sprite: faker.image.imageUrl()
     },
     {
-      id: 3,
-      name: 'Testmon3',
-      height: 123,
-      weight: 456,
+      id: faker.datatype.number(10),
+      name: faker.animal.type(),
+      height: faker.datatype.number(),
+      weight: faker.datatype.number(),
       stats: {
-        hp: 789,
-        attack: 0,
-        defense: 11,
-        specialAttack: 22,
-        specialDefense: 33,
-        speed: 44
+        hp: faker.datatype.number(),
+        attack: faker.datatype.number(),
+        defense: faker.datatype.number(),
+        specialAttack: faker.datatype.number(),
+        specialDefense: faker.datatype.number(),
+        speed: faker.datatype.number()
       },
-      types: ['bug', 'fire'],
-      abilities: ['testing', 'debugging'],
-      sprite: '12345'
-    }  
+      types: ['flying', 'water'],
+      abilities: [faker.random.word(), faker.random.word()],
+      sprite: faker.image.imageUrl()
+    },
+    {
+      id: faker.datatype.number(10),
+      name: faker.animal.type(),
+      height: faker.datatype.number(),
+      weight: faker.datatype.number(),
+      stats: {
+        hp: faker.datatype.number(),
+        attack: faker.datatype.number(),
+        defense: faker.datatype.number(),
+        specialAttack: faker.datatype.number(),
+        specialDefense: faker.datatype.number(),
+        speed: faker.datatype.number()
+      },
+      types: ['flying', 'water'],
+      abilities: [faker.random.word(), faker.random.word()],
+      sprite: faker.image.imageUrl()
+    },
   ];
+
+  const fakePokemonService = {
+    pokemons(){
+      return fakePokemons
+    },
+
+    loadPokemons(){
+
+    }
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContainerComponent ]
+      declarations: [ ContainerComponent ],
+      providers: [ PokemonService ]
     })
     .compileComponents();
 

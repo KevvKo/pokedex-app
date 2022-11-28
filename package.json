@@ -29,6 +29,7 @@
     "@angular-devkit/build-angular": "^15.0.0",
     "@angular/cli": "~15.0.0",
     "@angular/compiler-cli": "^15.0.0",
+    "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.2.3",
     "autoprefixer": "^10.4.13",
     "jest": "^28.1.3",

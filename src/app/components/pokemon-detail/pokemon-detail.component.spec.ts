@@ -2,27 +2,28 @@ import { ComponentFixture, waitForAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { PokemonDetailComponent } from './pokemon-detail.component';
 import { Pokemon } from 'src/app/interfaces/interfaces';
+import { faker } from '@faker-js/faker';
 
 describe('PokemonDetailComponent', () => {
   let component: PokemonDetailComponent;
   let fixture: ComponentFixture<PokemonDetailComponent>;
 
-  const mockPokemon: Pokemon = {
-    id: 1,
-    name: 'Testmon',
-    height: 123,
-    weight: 456,
+  const fakePokemon: Pokemon = {
+    id: faker.datatype.number(10),
+    name: faker.animal.type(),
+    height: faker.datatype.number(),
+    weight: faker.datatype.number(),
     stats: {
-      hp: 789,
-      attack: 0,
-      defense: 11,
-      specialAttack: 22,
-      specialDefense: 33,
-      speed: 44
+      hp: faker.datatype.number(),
+      attack: faker.datatype.number(),
+      defense: faker.datatype.number(),
+      specialAttack: faker.datatype.number(),
+      specialDefense: faker.datatype.number(),
+      speed: faker.datatype.number()
     },
     types: ['flying', 'water'],
-    abilities: ['testing', 'debugging'],
-    sprite: '12345'
+    abilities: [faker.random.word(), faker.random.word()],
+    sprite: faker.image.imageUrl()
   }
 
   beforeEach(async () => {
@@ -33,7 +34,7 @@ describe('PokemonDetailComponent', () => {
 
     fixture = TestBed.createComponent(PokemonDetailComponent);
     component = fixture.componentInstance;
-    component.pokemon = mockPokemon;
+    component.pokemon = fakePokemon;
     fixture.detectChanges();
   });
 
@@ -45,22 +46,22 @@ describe('PokemonDetailComponent', () => {
     it('should project and display the pokemon name', () => {
       expect(
         fixture.debugElement.query(By.css('h2')).nativeElement.innerHTML
-        ).toContain('Testmon');
+        ).toContain(fakePokemon.name);
     });
     it('should project and display the pokemon name', () => {
       expect(
         fixture.debugElement.query(By.css('h2')).nativeElement.innerHTML
-        ).toContain('Testmon');
+        ).toContain(fakePokemon.name);
     });
     it('should contain correct image alt value', () => {
       expect(
         fixture.debugElement.query(By.css('img')).nativeElement?.getAttribute('alt')
-      ).toContain(mockPokemon.name);
+      ).toContain(fakePokemon.name);
     });
     it('should contain correct image soure value', () => {
       expect(
         fixture.debugElement.query(By.css('img')).nativeElement?.getAttribute('src')
-      ).toContain(mockPokemon.sprite);
+      ).toContain(fakePokemon.sprite);
     });
     it('should open the modal', waitForAsync(() => {
       fixture
@@ -79,47 +80,47 @@ describe('PokemonDetailComponent', () => {
   describe('Modal', () => {   
     it('should contain correct image alt value', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       expect(
         fixture.debugElement.query(By.css('[aria-label="modal-pokemon-image"]')).nativeElement?.getAttribute('alt')
-      ).toContain(mockPokemon.name);
+      ).toContain(fakePokemon.name);
     });
     it('should contain correct image soure value', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       expect(
         fixture.debugElement.query(By.css('[aria-label="modal-pokemon-image"]')).nativeElement?.getAttribute('src')
-      ).toContain(mockPokemon.sprite);
+      ).toContain(fakePokemon.sprite);
     });
     it('should project and display the pokemon name', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       expect(
         fixture.debugElement.query(By.css('.pokemon-detail-modal h2'))?.nativeElement.innerHTML
-      ).toContain('Testmon');
+      ).toContain(fakePokemon.name);
     })
 
     it('should project and display the types', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       const types = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal .types span'));
 
-      expect(types[0].nativeElement.innerHTML).toContain(mockPokemon.types[0]);
-      expect(types[1].nativeElement.innerHTML).toContain(mockPokemon.types[1]);
+      expect(types[0].nativeElement.innerHTML).toContain(fakePokemon.types[0]);
+      expect(types[1].nativeElement.innerHTML).toContain(fakePokemon.types[1]);
 
     })
 
     it('should project and display the belonging color for a type', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       const types = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal .types span'));
@@ -130,101 +131,101 @@ describe('PokemonDetailComponent', () => {
 
     it('should project and display the size', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       expect(
         fixture.debugElement.queryAll(By.css('.pokemon-detail-modal .body-stats span'))[0]?.nativeElement.innerHTML
-      ).toContain(mockPokemon.height.toString());
+      ).toContain(fakePokemon.height.toString());
     })
 
     it('should project and display the weight', () => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       expect(
         fixture.debugElement.queryAll(By.css('.pokemon-detail-modal .body-stats span'))[2]?.nativeElement.innerHTML
-      ).toContain(mockPokemon.weight.toString());
+      ).toContain(fakePokemon.weight.toString());
     })
 
     describe('statistic items', () => {
       it('should project and display the hp value', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
 
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[0]
         
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.hp.toString());
+        ).toContain(fakePokemon.stats.hp.toString());
       })
 
       it('should project and display the attack value', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
 
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[1]
          
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.attack.toString());
+        ).toContain(fakePokemon.stats.attack.toString());
       })
 
       it('should project and display the defense value', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
 
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[2]
         
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.defense.toString());
+        ).toContain(fakePokemon.stats.defense.toString());
       })
 
       it('should project and display the special attack value', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
         
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[3]
         
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.specialAttack.toString());
+        ).toContain(fakePokemon.stats.specialAttack.toString());
       })
 
       it('should project and display the special defense value', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
 
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[4]
         
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.specialDefense.toString());
+        ).toContain(fakePokemon.stats.specialDefense.toString());
       })
 
       it('should project and display the speed', () => {
         component.open = true
-        component.selectedPokemon = mockPokemon
+        component.selectedPokemon = fakePokemon
         fixture.detectChanges();
 
         const statisticElement = fixture.debugElement.queryAll(By.css('.pokemon-detail-modal [aria-label="pokemon-statistic-item"'))[5]
         
         expect(
           statisticElement.query(By.css('span.text-right')).nativeElement.innerHTML
-        ).toContain(mockPokemon.stats.speed.toString());
+        ).toContain(fakePokemon.stats.speed.toString());
       })
     })
 
     it('should close the modal', waitForAsync(() => {
       component.open = true
-      component.selectedPokemon = mockPokemon
+      component.selectedPokemon = fakePokemon
       fixture.detectChanges();
 
       fixture
