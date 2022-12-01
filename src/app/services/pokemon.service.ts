@@ -15,7 +15,6 @@ import { Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
 @Injectable({
   providedIn: 'root'
 })
-
 export class PokemonService {
 
   private nextAPI: string = environment.pokemonListAPI;

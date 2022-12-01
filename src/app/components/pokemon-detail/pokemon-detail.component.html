@@ -1,15 +1,15 @@
 <ng-container *ngIf="pokemon">
     <section 
-        class="flex flex-col h-40 w-40 active:bg-slate-200 hover:bg-slate-200 hover:cursor-pointer"
+        class="flex flex-col h-full w-full justify-center items-center active:bg-slate-200"
         (click)="handleOpenDialog(pokemon)"
     >       
-        <img [src]="pokemon.sprite" [alt]="pokemon.name"/>  
+        <img class="h-5/6 w-4/6" [src]="pokemon.sprite" [alt]="pokemon.name"/>  
         <h2 class="text-lg capitalize text-center">{{pokemon.name}}</h2>       
     </section>
 </ng-container>
 
 <ng-container *ngIf="open">
-    <div class="pokemon-detail-modal fixed flex flex-col z-20 rounded bg-slate-100 bottom-0 left-0 w-full h-full p-2">
+    <div class="pokemon-detail-modal">
         <div class="dialog-header flex justify-end">
             <button aria-label="close-button" class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="handleCloseDialog()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PokemonService } from 'src/app/services/pokemon.service';
+import { PokemonService } from '@pokemon-service/pokemon.service';
 import { Pokemon } from 'src/app/interfaces/interfaces';
 
 @Component({
@@ -33,7 +33,6 @@ export class ContainerComponent implements OnInit {
         if(endOfPage) this.loadNextPokemons();
 
     }, throttleTime)
-
   }
 
   loadNextPokemons(): void {

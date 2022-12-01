@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContainerComponent } from './container.component';
-import { PokemonService } from 'src/app/services/pokemon.service';
+import { PokemonService } from '@pokemon-service/pokemon.service';
 import { of } from 'rxjs';
-import { FakePokemons } from 'src/app/mocks/mockData';
+import { FakePokemons } from '../../mocks/mockData';
 
 describe('ContainerComponent', () => {
   let component: ContainerComponent;

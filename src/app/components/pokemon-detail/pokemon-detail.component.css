@@ -1,4 +1,8 @@
 :host{
-    animation-name: pokemon-card;
+    @apply h-full w-full;
     
+}
+
+.pokemon-detail-modal{
+    @apply fixed flex flex-col z-20 rounded bg-slate-100 bottom-0 left-0 w-full h-full p-2;
 }
