@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ContainerComponent } from './components/container/container.component';
 import { CardComponent } from './components/card/card.component';
 import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-detail.component';
+import { CameraButtonComponent } from './camera-button/camera-button.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-deta
     HeaderComponent,
     ContainerComponent,
     CardComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    CameraButtonComponent
   ],
   imports: [
     BrowserModule,

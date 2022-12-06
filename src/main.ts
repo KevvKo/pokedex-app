@@ -2,10 +2,17 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 
+declare let window: any;
+declare let device: any;
 
-const onDeviceReady = ()  => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-}
+let onDeviceReady = () => {
+  platformBrowserDynamic().bootstrapModule(AppModule);
 
-document.addEventListener('DOMContentLoaded', onDeviceReady, false);
+  console.log(window.cordova)
+  console.log(device.cordova)
+  console.log(device.model)
+
+};
+
+if(window.corodva) document.addEventListener('deviceready', onDeviceReady, false);
+onDeviceReady()

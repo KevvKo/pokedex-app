@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PokemonService } from './pokemon.service';
 import { environment } from '../environments/environment';
-import { FakePokemons, FakeAPIData, FakePokemon } from '../mocks/mockData';
-import { Pokemon } from 'pokenode-ts';
+import { FakePokemons } from '../mocks/mockData';
 
 describe('PokemonService', () => {
   let service: PokemonService;

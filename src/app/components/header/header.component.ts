@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CameraButtonComponent } from '../../camera-button/camera-button.component';
 
 @Component({
   selector: 'app-header',
