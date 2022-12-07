@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CameraService } from '../services/camera.service';
 
 @Component({
   selector: 'app-camera-button',
@@ -7,7 +8,12 @@ import { Component } from '@angular/core';
 })
 export class CameraButtonComponent {
 
-  takePhoto(): void {
+  camera: any;
 
+  constructor(private picture: CameraService) {}
+
+
+  takePhoto(): void {
+    this.picture.takePhoto();
   }
 }
