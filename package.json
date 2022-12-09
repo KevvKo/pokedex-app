@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "ng": "ng",
+    "cordova": "cordova",
     "start": "ng serve",
-    "start:browser" :"ng build && cordova run browser",
+    "start:browser": "ng build && cordova run browser",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
@@ -39,6 +40,7 @@
     "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.2.4",
     "autoprefixer": "^10.4.13",
+    "cordova": "^11.0.0",
     "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
