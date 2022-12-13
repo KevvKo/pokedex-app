@@ -7,18 +7,22 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.pokedex"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.cordova.pokedex"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "io.cordova.pokedex"
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "io.cordova.pokedex"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.cordova.pokedex"
+    }
+  }
 }
