@@ -28,3 +28,4 @@ import { CameraButtonComponent } from './camera-button/camera-button.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+  

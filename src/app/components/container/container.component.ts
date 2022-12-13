@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PokemonService } from '@pokemon-service/pokemon.service';
 import { Pokemon } from 'src/app/interfaces/interfaces';
@@ -9,43 +9,30 @@ import { Pokemon } from 'src/app/interfaces/interfaces';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent {
+export class ContainerComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  private throttleTimer: boolean = false;
-  isLoading: boolean = true
+  private observer: IntersectionObserver;
   pokemons$ : Observable<Pokemon[]> = this.pokemonService.pokemons
-  
-  @HostListener('window:scroll', [])
-  handleInfiniteScroll(): void {
 
-    const throttleTime = 1000;
-    const distanceToPagBottom = 180;
-
-    this.throttle(() => {
-      const endOfPage = 
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - distanceToPagBottom;
-      
-        if(endOfPage) this.loadNextPokemons();
-
-    }, throttleTime)
-  }
+  @ViewChild('loading')
+  loading: ElementRef;
 
   constructor (private pokemonService: PokemonService) {}
+
+  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { this.loadNextPokemons()}
+    }, {
+      threshold: 0.10
+    });
+    this.observer.observe(this.loading.nativeElement)
+  }
+  ngOnDestroy(): void {
+    this.observer.disconnect()
+  }
 
   loadNextPokemons(): void {
     this.pokemonService.loadPokemons()
   }
-
-  throttle(callback: () => void, time: number): void {
-    
-    if(this.throttleTimer) return;
-
-    this.throttleTimer = true;
-
-    setTimeout(() => {
-      callback();
-      this.throttleTimer = false
-    }, time)
-  }
-
 }
