@@ -17,14 +17,7 @@
     "cordova-plugin-file": {
       "ANDROIDX_WEBKIT_VERSION": "1.4.0",
       "PACKAGE_NAME": "io.cordova.pokedex"
-    },
-    "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "io.cordova.pokedex"
     }
   },
-  "dependent_plugins": {
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "io.cordova.pokedex"
-    }
-  }
+  "dependent_plugins": {}
 }
