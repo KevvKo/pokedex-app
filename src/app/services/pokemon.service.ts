@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, combineLatest, map, Observable, switchMap, throwError,} from 'rxjs';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
+import {Pokemon, PokemonData, PokemonAPI, PokemonStats, Ability, Type } from '../interfaces/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,6 @@ export class PokemonService {
     return this._pokemons
   }
 
-  // TODO: json2ts could help to generate a TS Model for the API
   private mapToPokemon(pokemon: any): Pokemon {
 
     return {
@@ -32,14 +31,13 @@ export class PokemonService {
       height: pokemon.height,
       weight: pokemon.weight,
       stats: this.mapToPokemonStatistics(pokemon),
-      types: pokemon.types.map( (item: any) => item.type.name),
-      abilities: pokemon.abilities.map((item: any) => item.ability.name),
+      types: pokemon.types.map((item: Type) => item.type.name),
+      abilities: pokemon.abilities.map((item: Ability) => item.ability.name),
       sprite: pokemon.sprites.front_default
     }
   }
 
-  // TODO: json2ts could help to generate a TS Model for the API
-  private mapToPokemonStatistics(pokemon: any): PokemonStats {
+  private mapToPokemonStatistics(pokemon: PokemonData): PokemonStats {
 
     const { stats } = pokemon;
     const [
