@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Host, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PokemonService } from '@pokemon-service/pokemon.service';
 import { Pokemon } from 'src/app/interfaces/interfaces';
@@ -14,13 +14,8 @@ export class ContainerComponent implements OnInit {
   private throttleTimer: boolean = false;
   isLoading: boolean = true
   pokemons$ : Observable<Pokemon[]> = this.pokemonService.pokemons
-
-  constructor (private pokemonService: PokemonService) {}
-
-  ngOnInit(): void {
-    window.addEventListener('scroll', this.handleInfiniteScroll.bind(this))
-  }
-
+  
+  @HostListener('window:scroll', [])
   handleInfiniteScroll(): void {
 
     const throttleTime = 1000;
@@ -35,6 +30,11 @@ export class ContainerComponent implements OnInit {
     }, throttleTime)
   }
 
+  constructor (private pokemonService: PokemonService) {}
+
+  ngOnInit(): void {
+    screen.orientation.lock('landscape');
+  }
   loadNextPokemons(): void {
     this.pokemonService.loadPokemons()
   }
