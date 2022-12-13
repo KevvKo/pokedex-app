@@ -21,5 +21,7 @@ export interface PokemonStats {
 export interface PokemonAPI {
   next: string
   previous: string,
+
+  // TODO: json2ts could help to generate a TS Model for the API
   results: any[]
 }
