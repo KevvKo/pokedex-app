@@ -1,16 +1,8 @@
-import { Injectable } from '@angular/core';
-import { 
-  Observable, 
-  combineLatest, 
-  switchMap, 
-  map, 
-  catchError, 
-  throwError, 
-  BehaviorSubject,
-} from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, catchError, combineLatest, map, Observable, switchMap, throwError,} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {environment} from '../environments/environment';
+import {Pokemon, PokemonAPI, PokemonStats} from '../interfaces/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +13,17 @@ export class PokemonService {
   private previousAPI: string;
   private _pokemons: BehaviorSubject<Pokemon[]> = new BehaviorSubject<Pokemon[]>([]);
 
-  constructor(private http: HttpClient) {
-    this.loadPokemons();
-  }
+  constructor(private http: HttpClient) {}
 
   get pokemons(): Observable<Pokemon[]> {
+    if (this._pokemons.value.length === 0) {
+      this.loadPokemons();
+    }
+
     return this._pokemons
   }
-  
+
+  // TODO: json2ts could help to generate a TS Model for the API
   private mapToPokemon(pokemon: any): Pokemon {
 
     return {
@@ -43,17 +38,26 @@ export class PokemonService {
     }
   }
 
+  // TODO: json2ts could help to generate a TS Model for the API
   private mapToPokemonStatistics(pokemon: any): PokemonStats {
 
     const { stats } = pokemon;
+    const [
+      hp,
+      attack,
+      defense,
+      specialAttack,
+      specialDefense,
+      speed
+    ]: number[] = stats.map(({base_stat}: { base_stat: number }) => base_stat);
 
     return {
-      hp: stats[0].base_stat,
-      attack: stats[1].base_stat,
-      defense: stats[2].base_stat,
-      specialAttack: stats[3].base_stat,
-      specialDefense: stats[4].base_stat,
-      speed: stats[5].base_stat
+      hp,
+      attack,
+      defense,
+      specialAttack,
+      specialDefense,
+      speed
     }
   }
 
@@ -61,10 +65,10 @@ export class PokemonService {
     return this.http.get<PokemonAPI>(this.nextAPI)
       .pipe(
         switchMap( data => {
-        
+
           this.nextAPI = data.next;
           this.previousAPI = data.previous;
-        
+
           return combineLatest( data.results.map( item => {
             return this.getPokemonDetails(item.url)
           }))
