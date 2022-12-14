@@ -1,5 +1,4 @@
-<ng-container *ngIf="open">
-    <div class="pokemon-detail-modal fixed top-0 left-0 z-10">
+    <div *ngIf="open" class="pokemon-detail-modal absolute top-0 left-0 z-10">
         <div class="dialog-header flex justify-end">
             <button aria-label="close-button" class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="onClose()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
@@ -51,4 +50,3 @@
             </div>
         </div>
     </div>
-</ng-container>
