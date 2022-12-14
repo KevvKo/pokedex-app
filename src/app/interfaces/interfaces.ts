@@ -30,24 +30,24 @@ export interface Result {
 }
 
 export interface Ability {
-	ability: Ability;
+	ability: Ability_Name;
 	is_hidden: boolean;
 	slot: number;
 }
 
-export interface Ability {
+export interface Ability_Name {
 	name: string;
 	url: string;
 }
 
-export interface Type {
+export interface Type_Name {
 	name: string;
 	url: string;
 }
 
 export interface Type {
 	slot: number;
-	type: Type;
+	type: Type_Name;
 }
 
 export interface Form {

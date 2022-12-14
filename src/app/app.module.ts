@@ -9,6 +9,8 @@ import { ContainerComponent } from './components/container/container.component';
 import { CardComponent } from './components/card/card.component';
 import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-detail.component';
 import { CameraButtonComponent } from './camera-button/camera-button.component';
+import { CAMERA_TOKEN } from '@pokemon-service/camera.service';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,15 @@ import { CameraButtonComponent } from './camera-button/camera-button.component';
     ContainerComponent,
     CardComponent,
     PokemonDetailComponent,
-    CameraButtonComponent
+    CameraButtonComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: CAMERA_TOKEN, useValue: {getPicture: () => { alert('Camera')}}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

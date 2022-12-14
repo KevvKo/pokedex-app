@@ -1,0 +1,54 @@
+<ng-container *ngIf="open">
+    <div class="pokemon-detail-modal fixed top-0 left-0 z-10">
+        <div class="dialog-header flex justify-end">
+            <button aria-label="close-button" class="active:bg-gray-300 p-2 hover:bg-gray-200 rounded-full" (click)="onClose()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col flex-1">
+            <img aria-label="modal-pokemon-image" [src]="pokemon.sprite" [alt]="pokemon.name" class="w-8/12 mx-auto"/>
+            <h2 class="text-lg text-center capitalize font-semibold mx-auto mb-2">{{pokemon.name}}</h2>
+            <div class="types flex justify-center">
+                <span class="mx-2 text-sm rounded-full px-3 py-1" [ngClass]="getClassByType(type)" *ngFor="let type of pokemon.types">{{type}}</span>
+            </div>
+            <div class="body-stats flex justify-center mt-5">
+                <div class="flex flex-col justify-center w-1/4">
+                    <span class="text-center">{{pokemon.height}}</span>
+                    <span class="text-center text-sm text-slate-500">Size</span>
+                </div>
+                <div class="flex flex-col justify-center w-1/4"> 
+                    <span class="text-center">{{pokemon.weight}}</span>
+                    <span class="text-center text-sm text-slate-500">Weight</span>
+                </div>
+            </div>
+            <div class="px-8 my-auto">
+                <div aria-label="pokemon-statistic-item" class="flex align-center mb-2"> 
+                    <span class="w-1/2">HP</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.hp}}</span>
+                </div>    
+                <div aria-label="pokemon-statistic-item" class="flex mb-2"> 
+                    <span class="w-1/2">Attack</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.attack}}</span>
+                </div>    
+                <div aria-label="pokemon-statistic-item" class="flex mb-2"> 
+                    <span class="w-1/2">Defense</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.defense}}</span>
+                </div>    
+                <div aria-label="pokemon-statistic-item" class="flex mb-2"> 
+                    <span class="w-1/2">Special Attack</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.specialAttack}}</span>
+                </div>    
+                <div aria-label="pokemon-statistic-item" class="flex mb-2"> 
+                    <span class="w-1/2">Special Defense</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.specialDefense}}</span>
+                </div>    
+                <div aria-label="pokemon-statistic-item" class="flex mb-2"> 
+                    <span class="w-1/2">Speed</span>
+                    <span class="w-1/2 text-right">{{pokemon.stats.speed}}</span>
+                </div>    
+            </div>
+        </div>
+    </div>
+</ng-container>

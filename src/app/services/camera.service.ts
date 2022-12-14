@@ -1,24 +1,18 @@
-import { Injectable, OnInit } from '@angular/core';
+import { inject, Injectable, InjectionToken, OnInit } from '@angular/core';
 
 declare let navigator: any;
+export const CAMERA_TOKEN = new InjectionToken<any>('Cordova Camera API', {factory: () => navigator.camera});
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CameraService implements OnInit  {
+export class CameraService  {
 
-
-  camera: any;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.camera = navigator.camera;
-  }
+  camera: any = inject(CAMERA_TOKEN);
 
   takePhoto(): void {
-    navigator.camera.getPicture(this.onSuccess, this.onFailure);
+    this.camera.getPicture(this.onSuccess, this.onFailure);
   }
 
   private onSuccess(response: string){
