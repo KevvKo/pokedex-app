@@ -22,7 +22,7 @@ export class PokemonDetailComponent {
   }
 
   handleCloseDialog(): void {
-    this.toggleDialog();
+    this.open = !this.open
     document.getElementsByTagName('body')[0].style.overflow = 'auto';
   }
 
