@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { PokemonService } from "@pokemon-service/pokemon.service";
 import { PokemonsState, Pokemon } from "../interfaces/interfaces";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, pipe, switchMap } from "rxjs";
+import { catchError, Observable,pipe, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
@@ -24,7 +24,8 @@ export class PokemonStore extends ComponentStore<PokemonsState> {
                         pokemons => { this.addPokemons(pokemons)},
                         (error: HttpErrorResponse) => console.error(error)                    )
                 )
-            )
+            ),
+            catchError(error => error)
         )
     )
 
