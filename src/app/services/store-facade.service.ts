@@ -6,7 +6,7 @@ import { catchError, Observable,pipe, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
-export class PokemonStore extends ComponentStore<PokemonsState> {
+export class StoreFacadeService extends ComponentStore<PokemonsState> {
 
     constructor(private pokemonService: PokemonService){
         super({pokemons: []})

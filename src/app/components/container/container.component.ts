@@ -1,25 +1,21 @@
 import { Component, ElementRef,AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PokemonService } from '@pokemon-service/pokemon.service';
-import { Pokemon } from 'src/app/interfaces/interfaces';
-import { PokemonStore } from 'src/app/store/pokemon.store';
-
+import { StoreFacadeService } from '@pokemon-service/store-facade.service';
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.css'],
-  providers: [PokemonStore]
+  providers: [StoreFacadeService]
 })
 
 export class ContainerComponent implements AfterViewInit, OnDestroy {
 
   private observer: IntersectionObserver;
-  pokemons$ = this.pokemonStore.pokemons$
+  pokemons$ = this.facadeService.pokemons$
 
   @ViewChild('loading')
   loading: ElementRef | undefined;
 
-  constructor ( private readonly pokemonStore: PokemonStore) {}
+  constructor ( private readonly facadeService: StoreFacadeService) {}
 
   ngAfterViewInit(): void {
     this.observer = new IntersectionObserver(entries => {
@@ -35,6 +31,6 @@ export class ContainerComponent implements AfterViewInit, OnDestroy {
   }
 
   loadNextPokemons(): void {
-    this.pokemonStore.getPokemons()
+    this.facadeService.getPokemons()
   }
 }

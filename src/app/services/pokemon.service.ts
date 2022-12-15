@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, combineLatest, map, Observable, switchMap, throwError,} from 'rxjs';
+import {catchError, combineLatest, map, Observable, switchMap, throwError,} from 'rxjs';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {Pokemon, PokemonData, PokemonAPI, PokemonStats, Ability, Type } from '../interfaces/interfaces'
