@@ -1,29 +1,30 @@
-import { Component, ElementRef, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef,AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PokemonService } from '@pokemon-service/pokemon.service';
 import { Pokemon } from 'src/app/interfaces/interfaces';
+import { PokemonStore } from 'src/app/store/pokemon.store';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.css'],
+  providers: [PokemonStore]
 })
 
-export class ContainerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ContainerComponent implements AfterViewInit, OnDestroy {
 
   private observer: IntersectionObserver;
-  pokemons$ : Observable<Pokemon[]> = this.pokemonService.pokemons
+  pokemons$ = this.pokemonStore.pokemons$
 
   @ViewChild('loading')
   loading: ElementRef | undefined;
 
-  constructor (private pokemonService: PokemonService) {}
-
-  ngOnInit(): void {}
+  constructor ( private readonly pokemonStore: PokemonStore) {}
 
   ngAfterViewInit(): void {
     this.observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { this.loadNextPokemons()}
+      if (entries[0].isIntersecting) { 
+        this.loadNextPokemons()}
     }, {
       threshold: 0.10
     });
@@ -34,6 +35,6 @@ export class ContainerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadNextPokemons(): void {
-    this.pokemonService.loadPokemons()
+    this.pokemonStore.getPokemons()
   }
 }

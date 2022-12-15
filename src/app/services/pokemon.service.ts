@@ -11,17 +11,8 @@ export class PokemonService {
 
   private nextAPI: string = environment.pokemonListAPI;
   private previousAPI: string;
-  private _pokemons: BehaviorSubject<Pokemon[]> = new BehaviorSubject<Pokemon[]>([]);
 
   constructor(private http: HttpClient) {}
-
-  get pokemons(): Observable<Pokemon[]> {
-    if (this._pokemons.value.length === 0) {
-      this.loadPokemons();
-    }
-
-    return this._pokemons
-  }
 
   private mapToPokemon(pokemon: any): Pokemon {
 
@@ -59,14 +50,12 @@ export class PokemonService {
     }
   }
 
-  private loadPokemonData(): Observable<Pokemon[]>{
+  fetchPokemons(): Observable<Pokemon[]>{
     return this.http.get<PokemonAPI>(this.nextAPI)
       .pipe(
         switchMap( data => {
-
           this.nextAPI = data.next;
           this.previousAPI = data.previous;
-
           return combineLatest( data.results.map( item => {
             return this.getPokemonDetails(item.url)
           }))
@@ -92,12 +81,5 @@ export class PokemonService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
-  }
-
-
-  loadPokemons(): void {
-    this.loadPokemonData().subscribe( response =>{
-      this._pokemons.next([...this._pokemons.getValue(), ...response])
-    })
   }
 }

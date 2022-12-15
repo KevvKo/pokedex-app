@@ -11,6 +11,7 @@ import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-deta
 import { CameraButtonComponent } from './camera-button/camera-button.component';
 import { CAMERA_TOKEN } from '@pokemon-service/camera.service';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [{provide: CAMERA_TOKEN, useValue: {getPicture: () => { alert('Camera')}}}],
   bootstrap: [AppComponent]
